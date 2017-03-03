@@ -1,0 +1,501 @@
+###########################################################################
+############  Original Settings for Reference Material    #################
+###########################################################################
+#
+set $mod Mod4
+#set $mod1 ALT
+
+###########################################################################
+################       Start of all the settings          #################
+###########################################################################
+#
+# KEY DEFINITIONS TO REMEMBER
+#
+# $Mod = WINDOWS key or Super key or Mod4
+# Mod1 = ALT key
+# Control = CTRL key
+# Shift = SHIFT key
+# Escape = ESCAPE key
+# Return = ENTER or RETURN key
+# Pause = PAUSE key
+# Print = PRINT key
+# Tab = TAB key
+#
+################################################################
+################### MOVING AROUND ##############################
+################################################################
+#
+# split in horizontal orientation
+bindsym Mod1+h split h
+# split in vertical orientation
+bindsym Mod1+v split v
+#
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+#
+# MOVE FOCUSED WINDOW
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+#
+# SWITCH TO WORKSPACE
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+#
+# move focused container to workspace
+bindsym $mod+Control+1 move container to workspace 1
+bindsym $mod+Control+2 move container to workspace 2
+bindsym $mod+Control+3 move container to workspace 3
+bindsym $mod+Control+4 move container to workspace 4
+bindsym $mod+Control+5 move container to workspace 5
+bindsym $mod+Control+6 move container to workspace 6
+bindsym $mod+Control+7 move container to workspace 7
+bindsym $mod+Control+8 move container to workspace 8
+bindsym $mod+Control+9 move container to workspace 9
+bindsym $mod+Control+0 move container to workspace 10
+# 
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+################### TILING PARAMETERS ##############################
+# orientation for new workspaces 
+default_orientation horizontal
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout toggle split
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+q focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+
+################### RELOAD AND EXIT #####################
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+#############################################
+################### RESIZE ##################
+#############################################
+# resize window (you can also use the mouse for that)
+
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+################### FONTS ######################
+font pango:Noto Mono Regular 10
+
+################### MENU ######################
+#####  START DMENU
+bindsym $mod+d exec dmenu_run -fn 'NotoMonoRegular:bold:pixelsize=18' 
+
+################### DUAL SCREEN ######################
+# setting variables for later use
+# use xrandr and/or arandr to know the names of your monitors
+# use this line to tell which monitor is on the right
+# xrandr --output DVI-I-2 --right-of DVI-I-1 --auto
+
+# my current setup
+set $firstMonitor eDP1
+#set $secondMonitor DP1
+
+workspace 1 output $firstMonitor
+workspace 2 output $firstMonitor
+workspace 3 output $firstMonitor
+workspace 4 output $firstMonitor
+workspace 5 output $firstMonitor
+workspace 6 output $firstMonitor #$secondMonitor
+workspace 7 output $firstMonitor #$secondMonitor
+workspace 8 output $firstMonitor #$secondMonitor
+workspace 9 output $firstMonitor #$secondMonitor
+workspace 10 output $firstMonitor #$secondMonitor
+
+################### MOUSE ######################
+# mouse settings
+# The middle button over a titlebar kills the window
+# bindsym --release button2 kill
+# The middle button and a modifer over any part of the window kills the window
+# bindsym --whole-window $mod+button2 kill
+# The right button toggles floating
+# bindsym button3 floating toggle
+# bindsym $mod+button3 floating toggle
+# The side buttons move the window around
+# bindsym button9 move left
+# bindsym button8 move right
+
+################### ASSIGN ######################
+# Assign application to start on a specific workspace
+# you can find the class with the program xprop
+
+assign [class="gnome-terminal"]         → 1
+assign [class="Firefox"]                → 2
+assign [class="google-chrome-stable"]   → 3
+assign [class="nemo"]			→ 4
+assign [class="remmina"]		→ 9
+assign [class="subl3"]			→ 10
+
+##################################################
+############### AUTO EXECUTE #####################
+##################################################
+# TRAY APPLICATIONS
+# num lock activated
+exec_always --no-startup-id numlockx off
+#antergos
+exec --no-startup-id nm-applet
+#install this program for applet
+exec network-manager-applet
+# volume
+exec pasystray
+#exec volti
+exec volumeicon
+#variety
+exec variety
+# clipit
+exec clipit
+## Gnome-Settings-Daemon
+exec gnome-settings-daemon 
+#
+#############################################
+########## SHORTCUTS APPLICATIONS ###########
+#############################################
+#workspace 1 related
+bindsym $mod+F1 exec gnome-terminal;workspace 1;focus
+
+#workspace 2 related
+bindsym $mod+F2 exec firefox;workspace 2;focus
+
+#workspace 3 related
+bindsym $mod+F3 exec google-chrome-stable;workspace 3;focus
+
+#workspace 4 related
+bindsym $mod+F4 exec nemo;workspace 4;focus
+
+#workspace 5 related
+
+#workspace 6 related
+
+#workspace 7 related
+
+#workspace 8 related
+bindsym $mod+F8 exec evolution;workspace 8;focus
+
+#workspace 9 related
+bindsym $mod+F9 exec remmina;workspace 9;focus
+
+###############################################
+########### SHORTCUTS WORKSPACES ##############
+###############################################
+# next/previous workspace
+bindsym mod1+Tab workspace next
+bindsym mod1+Shift+Tab workspace prev
+bindsym $mod+Tab workspace back_and_forth
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+bindsym $mod+Return exec gnome-terminal;focus
+bindsym control+Shift+Escape exec gnome-system-monitor;focus
+
+################### SCREENSHOTS ######################
+bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+bindsym Control+Print exec gnome-screenshot -i
+
+################### FLOATING OR TILED ######################
+#floating enabled from some programs - find with xprop
+#for_window [class="Gnome-disks"] floating enable
+#for_window [class="^Skype$"] floating enable
+#for_window [class="^Gnome-font-viewer$"] floating enable
+#for_window [class="^Gpick$"] floating enable
+#for_window [class="^Vlc$"] floating enable
+#for_window [class="^Spotify$"] floating enable workspace 10
+#for_window [instance="gimp"] floating enable
+#for_window [window_role="^gimp-toolbox-color-dialog$"] floating enable
+#for_window [instance="variety"] floating enable
+#for_window [class="Gnome-system-monitor"] floating enable
+#for_window [class="Mate-system-monitor"] floating enable
+#for_window [class="Xfce4-taskmanager"] floating enable
+#for_window [class="Brasero"] floating enable
+#for_window [class="Xfburn"] floating enable
+#for_window [class="Xfce4-appfinder"] floating enable
+#for_window [class="Wine"] floating enable
+#for_window [class="Pavucontrol"] floating enable
+#for_window [window_role="pop-up"] floating enable
+#for_window [window_role="^Preferences$"] floating enable
+#for_window [window_role="setup"] floating enable
+#for_window [title="^Terminator Preferences$"] floating enable
+#for_window [class="Font-manager"] floating enable
+for_window [class="System-config-printer.py"] floating enable
+#for_window [class="Nitrogen"] floating enable
+for_window [title="Copying"] floating enable  
+for_window [title="Deleting"] floating enable  
+for_window [title="Moving"] floating enable
+#for_window [class="Unetbootin.elf"] floating enable
+#for_window [class="Galculator"] floating enable
+#for_window [class="Usb-creator-gtk"] floating enable
+#for_window [instance="script-fu"] border normal
+#for_window [class="Imagewriter"] floating enable
+#for_window [class="MintUpdate.py"] floating enable
+#for_window [class="Bleachbit"] floating enable
+#for_window [class="Hexchat"] floating disable
+#for_window [class="Xfce4-settings-manager"] floating disable
+#for_window [class="Gnome-control-center"] floating disable
+for_window [class="gnome-terminal"] focus
+
+#Popups during fullscreen mode
+popup_during_fullscreen smart
+
+##################################
+########## MODE_SYSTEM ###########
+##################################
+bindsym $mod+Pause mode "$mode_system"
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id ~/.config/i3/scripts/i3exit.sh lock, mode "default"
+    bindsym e exec --no-startup-id ~/.config/i3/scripts/i3exit.sh logout, mode "default"
+    bindsym s exec --no-startup-id ~/.config/i3/scripts/i3exit.sh suspend, mode "default"
+    bindsym h exec --no-startup-id ~/.config/i3/scripts/i3exit.sh hibernate, mode "default"
+    bindsym r exec --no-startup-id ~/.config/i3/scripts/i3exit.sh reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id ~/.config/i3/scripts/i3exit.sh shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+##############################
+########## AUDIO #############
+##############################
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '5%+'"
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '5%-'"
+bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
+#https://github.com/acrisci/playerctl/
+#bindsym XF86AudioPlay exec playerctl play-pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
+#bindsym XF86AudioStop exec playerctl stop
+#bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause" 
+#bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next" 
+#bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+#bindsym XF86AudioStop exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+
+##############################################
+###############   BRIGHTNESS #################
+##############################################
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+
+################### BORDER ######################
+# Border control
+hide_edge_borders both
+bindsym $mod+shift+b exec i3-msg border toggle
+
+#changing border style
+#bindsym $mod+t border normal
+#bindsym $mod+y border 1pixel
+#bindsym $mod+u border none
+
+#new_window pixel 1
+new_window normal
+#new_window none
+
+#new_float pixel 1
+new_float normal
+#new_float none
+
+###################       KEYBOARD      ##############################
+# Change this if you use qwerty
+#exec setxkbmap us
+###################       UNCLUTTER      ##############################
+# get the mouse out of the way with unclutter
+exec unclutter 
+
+################### BAR APPEARANCE ######################
+# bar toggle, hide or show 
+#bindsym $mod+b bar mode toggle
+bar {
+    height 25
+    workspace_buttons yes
+    # font pango:DroidSansMono 13
+    font pango:Noto Sans 13
+    #you can change the place via xrandr
+    output eDP1
+    #position top
+
+status_command i3blocks -c ~/.config/i3/i3blocks-awesome.conf
+#
+colors {
+        background #2F2F2F
+        statusline #eeeeee
+        separator #666666
+        #                     border  backgr. text
+        focused_workspace     #a9a9a9 #222222 #a9a9a9
+        active_workspace      #a9a9a9 #222222 #a9a9a9
+        inactive_workspace    #a9a9a9 #5f676a #a9a9a9
+        urgent_workspace      #4A4A4A #4A4A4A #a9a9a9
+        }
+
+}
+    
+
+# DarkGrey background with white text - not focus grey background - black text
+# Windows decoration colors
+# class                 border  backgr. text    indicator
+client.placeholder      #242424 #242424 #242424
+client.background       #242424 #242424 #242424
+client.focused          #4A4A4A #4A4A4A #e5e5e5 #4A4A4A
+client.unfocused        #222222 #222222 #aaaaaa #222222
+client.focused_inactive #222222 #222222 #a9a9a9 #222222
+client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
+
+###########################################################################
+###################  I 3  G A P S  N E X T   ##############################
+###########################################################################
+# Settings for I3 next gap git
+# https://github.com/Airblader/i3/tree/gaps-next
+# Archlinux via aur installation
+# http://dotx.me/snippets-i3-gaps/
+# delete or uncomment the following lines if you do not have it or do not
+# want it
+# packer i3-gaps-next-git --noedit
+
+for_window [class="^.*"] border pixel 5
+gaps inner 10 
+gaps outer 5
+#smart_gaps on
+#smart_borders on
+
+
+###########################################################################
+###################       I3 GAPS CHANGE     ##############################
+###########################################################################
+
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+###########################################################################
+###################       C O M P T O N      ##############################
+###########################################################################
+#if you want transparency on non-focused windows
+exec_always compton --config ~/.config/i3/compton.conf
+
+##########################################################
+######## USER APPLICATIONS TO START AT BOOT ##############
+##########################################################
+#
+#Authentication dialog
+#arch budgie
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# Arch
+exec pamac-tray
+# bluetooth
+exec blueberry-tray
+exec --no-startup-id blueman-applet
+# KBD LAyout toggling 
+exec --no-startup-id "setxkbmap -model pc101 -layout us,bg -variant ,phonetic -option grp:alt_shift_toggle,grp_led:none"
+#
+##############################
+########## VARIETY ###########
+##############################
+#Variety keybindings mod1 = ALT
+# trash wallpaper
+bindsym mod1+t exec variety -t
+# next wallpaper
+bindsym mod1+n exec variety -n
+#bindsym mod1+Right exec variety -n
+# previous wallpaper
+bindsym mod1+p exec variety -p
+#bindsym mod1+Left exec variety -p
+# favorite wallpaper
+bindsym mod1+f exec variety -f
+# pause wallpaper
+bindsym mod1+Up exec variety --pause
+# resume wallpaper
+bindsym mod1+Down exec variety --resume
+################################################################
+################### STOPPING A PROGRAM #########################
+################################################################
+# kill focused window
+bindsym $mod+Shift+q kill
+
+#
+## Lock screen
+bindsym Control+$mod+l exec i3lock
