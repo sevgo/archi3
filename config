@@ -169,7 +169,7 @@ workspace 10 output $firstMonitor #$secondMonitor
 # Assign application to start on a specific workspace
 # you can find the class with the program xprop
 
-assign [class="gnome-terminal"]         → 1
+assign [class="terminator"]         → 1
 assign [class="Firefox"]                → 2
 assign [class="google-chrome-stable"]   → 3
 assign [class="nemo"]			→ 4
@@ -201,7 +201,7 @@ exec gnome-settings-daemon
 ########## SHORTCUTS APPLICATIONS ###########
 #############################################
 #workspace 1 related
-bindsym $mod+F1 exec gnome-terminal;workspace 1;focus
+bindsym $mod+F1 exec terminator;workspace 1;focus
 
 #workspace 2 related
 bindsym $mod+F2 exec firefox;workspace 2;focus
@@ -224,6 +224,9 @@ bindsym $mod+F8 exec evolution;workspace 8;focus
 #workspace 9 related
 bindsym $mod+F9 exec remmina;workspace 9;focus
 
+## Dial monitor setup 
+bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/dualscreen_autoset.sh
+#
 ###############################################
 ########### SHORTCUTS WORKSPACES ##############
 ###############################################
@@ -235,7 +238,7 @@ bindsym $mod+Tab workspace back_and_forth
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
-bindsym $mod+Return exec gnome-terminal;focus
+bindsym $mod+Return exec terminator;focus
 bindsym control+Shift+Escape exec gnome-system-monitor;focus
 
 ################### SCREENSHOTS ######################
@@ -281,7 +284,7 @@ for_window [title="Moving"] floating enable
 #for_window [class="Hexchat"] floating disable
 #for_window [class="Xfce4-settings-manager"] floating disable
 #for_window [class="Gnome-control-center"] floating disable
-for_window [class="gnome-terminal"] focus
+for_window [class="terminator"] focus
 
 #Popups during fullscreen mode
 popup_during_fullscreen smart
@@ -402,9 +405,9 @@ client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
 # want it
 # packer i3-gaps-next-git --noedit
 
-for_window [class="^.*"] border pixel 5
-gaps inner 10 
-gaps outer 5
+for_window [class="^.*"] border pixel 2
+gaps inner 6 
+gaps outer 3
 #smart_gaps on
 #smart_borders on
 
