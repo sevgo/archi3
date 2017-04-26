@@ -138,19 +138,19 @@ bindsym $mod+d exec dmenu_run -fn 'NotoMonoRegular:bold:pixelsize=18'
 # xrandr --output DVI-I-2 --right-of DVI-I-1 --auto
 
 # my current setup
-set $firstMonitor eDP1
-#set $secondMonitor DP1
+set $firstMonitor DP1
+set $secondMonitor eDP1
 
 workspace 1 output $firstMonitor
 workspace 2 output $firstMonitor
 workspace 3 output $firstMonitor
 workspace 4 output $firstMonitor
 workspace 5 output $firstMonitor
-workspace 6 output $firstMonitor #$secondMonitor
-workspace 7 output $firstMonitor #$secondMonitor
-workspace 8 output $firstMonitor #$secondMonitor
-workspace 9 output $firstMonitor #$secondMonitor
-workspace 10 output $firstMonitor #$secondMonitor
+workspace 6 output $secondMonitor
+workspace 7 output $secondMonitor
+workspace 8 output $secondMonitor
+workspace 9 output $secondMonitor
+workspace 10 output $secondMonitor
 
 ################### MOUSE ######################
 # mouse settings
@@ -189,7 +189,7 @@ exec network-manager-applet
 # volume
 exec pasystray
 #exec volti
-exec volumeicon
+#exec volumeicon
 #variety
 exec variety
 # clipit
@@ -225,7 +225,7 @@ bindsym $mod+F8 exec evolution;workspace 8;focus
 bindsym $mod+F9 exec remmina;workspace 9;focus
 
 ## Dial monitor setup 
-bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/dualscreen_autoset.sh
+#bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/dualscreen_autoset.sh
 #
 ###############################################
 ########### SHORTCUTS WORKSPACES ##############
@@ -271,7 +271,7 @@ bindsym Control+Print exec gnome-screenshot -i
 #for_window [class="Font-manager"] floating enable
 for_window [class="System-config-printer.py"] floating enable
 #for_window [class="Nitrogen"] floating enable
-for_window [title="Copying"] floating enable  
+#for_window [title="Copying"] floating enable  
 for_window [title="Deleting"] floating enable  
 for_window [title="Moving"] floating enable
 #for_window [class="Unetbootin.elf"] floating enable
@@ -365,7 +365,7 @@ bar {
     # font pango:DroidSansMono 13
     font pango:Noto Sans 13
     #you can change the place via xrandr
-    output eDP1
+    output $firstMonitor
     #position top
 
 status_command i3blocks -c ~/.config/i3/i3blocks-awesome.conf
@@ -383,7 +383,23 @@ colors {
 
 }
     
-
+bar {
+    height 25
+    workspace_buttons yes
+    font pango:Noto Sans 11
+    output $secondMonitor
+    #position top
+ colors {
+        background #2F2F2F
+        statusline #eeeeee
+        separator #666666
+        #                     border  backgr. text
+        focused_workspace     #a9a9a9 #222222 #a9a9a9
+        active_workspace      #a9a9a9 #222222 #a9a9a9
+        inactive_workspace    #a9a9a9 #5f676a #a9a9a9
+        urgent_workspace      #4A4A4A #4A4A4A #a9a9a9
+        }
+}
 # DarkGrey background with white text - not focus grey background - black text
 # Windows decoration colors
 # class                 border  backgr. text    indicator
@@ -405,9 +421,9 @@ client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
 # want it
 # packer i3-gaps-next-git --noedit
 
-for_window [class="^.*"] border pixel 2
-gaps inner 6 
-gaps outer 3
+for_window [class="^.*"] border pixel 1
+gaps inner 4 
+gaps outer 1
 #smart_gaps on
 #smart_borders on
 
