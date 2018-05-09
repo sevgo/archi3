@@ -2,28 +2,7 @@
 #
 # Dual monitor support
 
-if xrandr | grep -q 'DVI-I-0 connected' && xrandr | grep -q 'DVI-I-3 connected'
+if xrandr | grep -q 'DP1 connected' && xrandr | grep -q 'eDP1 connected'
 then
-	xrandr --output DVI-I-0 --auto --left-of DVI-I-3
-
-fi
-
-if xrandr | grep -q 'DVI-0 connected' && xrandr | grep -q 'DVI-1 connected'
-then
-	xrandr --output DVI-0 --auto --left-of DVI-1
-
-fi
-
-
-if xrandr | grep -q 'DVI-I-1 connected' && xrandr | grep -q 'DVI-I-2 connected'
-then
-	xrandr --output DVI-I-1 --auto --left-of DVI-I-2
-
-fi
-
-
-if xrandr | grep -q 'DVI-I-2 connected' && xrandr | grep -q 'DVI-I-3 connected'
-then
-	xrandr --output DVI-I-2 --auto --left-of DVI-I-3
-
+        xrandr --output DP1 --mode 1920x1080 --output eDP1 --mode 1600x900 --left-of DP1
 fi

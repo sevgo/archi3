@@ -41,37 +41,70 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+#############################################
+#                                           #
+#            WORKSPACE TAGGING              #
+#                                           #
+#############################################
+
 #
-#i# Name the workspaces
-#set $tag1 "1: ZSH"
-#set $tag2 "2: WWW"
-#set $tag3 "3: NTL"
-#set $tag4 "4: INF"
-#set $tag5 "5: DEV"
+## Name the workspaces
+set $workspace1 "1"
+set $workspace2 "2"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9"
 
 # SWITCH TO WORKSPACE
-bindsym $mod+1 workspace 1
-#bindsym $mod+1 workspace $tag1
-bindsym $mod+2 workspace 2
-#bindsym $mod+2 workspace $tag2
-bindsym $mod+3 workspace 3
-#bindsym $mod+3 workspace $tag3
-bindsym $mod+4 workspace 4
-#bindsym $mod+4 workspace $tag4
-bindsym $mod+5 workspace 5
-#bindsym $mod+5 workspace $tag5
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
 #
 # move focused container to workspace
-bindsym $mod+Control+1 move container to workspace 1
-#bindsym $mod+Control+1 move container to workspace $tag1
-bindsym $mod+Control+2 move container to workspace 2
-#bindsym $mod+Control+2 move container to workspace $tag2
-bindsym $mod+Control+3 move container to workspace 3
-#bindsym $mod+Control+3 move container to workspace $tag3
-bindsym $mod+Control+4 move container to workspace 4
-#bindsym $mod+Control+4 move container to workspace $tag4
-bindsym $mod+Control+5 move container to workspace 5
-#bindsym $mod+Control+5 move container to workspace $tag5
+bindsym $mod+Control+1 move container to workspace $workspace1
+bindsym $mod+Control+2 move container to workspace $workspace2
+bindsym $mod+Control+3 move container to workspace $workspace3
+bindsym $mod+Control+4 move container to workspace $workspace4
+bindsym $mod+Control+5 move container to workspace $workspace5
+bindsym $mod+Control+6 move container to workspace $workspace6
+bindsym $mod+Control+7 move container to workspace $workspace7
+bindsym $mod+Control+8 move container to workspace $workspace8
+bindsym $mod+Control+9 move container to workspace $workspace9
+#
+##################################################################
+
+# ORIGINAL workspace switching ###
+# SWITCH TO WORKSPACE
+#bindsym $mod+1 workspace 1
+#bindsym $mod+2 workspace 2
+#bindsym $mod+3 workspace 3
+#bindsym $mod+4 workspace 4
+#bindsym $mod+5 workspace 5
+#bindsym $mod+6 workspace 6
+#bindsym $mod+7 workspace 7
+#bindsym $mod+8 workspace 8
+#bindsym $mod+9 workspace 9
+#
+# move focused container to workspace
+#bindsym $mod+Control+1 move container to workspace 1
+#bindsym $mod+Control+2 move container to workspace 2
+#bindsym $mod+Control+3 move container to workspace 3
+#bindsym $mod+Control+4 move container to workspace 4
+#bindsym $mod+Control+5 move container to workspace 5
+#bindsym $mod+Control+6 move container to workspace 6
+#bindsym $mod+Control+7 move container to workspace 7
+#bindsym $mod+Control+8 move container to workspace 8
+#bindsym $mod+Control+9 move container to workspace 9
 # 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -136,8 +169,8 @@ font pango:Noto Mono Regular 10
 
 ################### MENU ######################
 #####  START DMENU
-bindsym $mod+d exec dmenu_run -fn 'NotoMonoRegular:bold:pixelsize=18' 
-
+#bindsym $mod+d exec dmenu_run -fn 'NotoMonoRegular:bold:pixelsize=18' 
+bindsym $mod+d exec --no-startup-id rofi -show run
 ################### DUAL SCREEN ######################
 # setting variables for later use
 # use xrandr and/or arandr to know the names of your monitors
@@ -145,14 +178,18 @@ bindsym $mod+d exec dmenu_run -fn 'NotoMonoRegular:bold:pixelsize=18'
 # xrandr --output DVI-I-2 --right-of DVI-I-1 --auto
 
 # my current setup
-#set $firstMonitor eDP1
-#set $secondMonitor DP1
+set $firstMonitor DP1
+set $secondMonitor eDP1
 
-#workspace 1 output $firstMonitor
-#workspace 2 output $firstMonitor
-#workspace 3 output $firstMonitor
-#workspace 4 output $firstMonitor
-#workspace 5 output $firstMonitor
+workspace $workspace1 output $firstMonitor
+workspace $workspace2 output $firstMonitor
+workspace $workspace3 output $firstMonitor
+workspace $workspace4 output $firstMonitor
+workspace $workspace5 output $firstMonitor
+workspace $workspace6 output $secondMonitor
+workspace $workspace7 output $secondMonitor
+workspace $workspace8 output $secondMonitor
+workspace $workspace9 output $secondMonitor
 
 ################### MOUSE ######################
 # mouse settings
@@ -180,7 +217,6 @@ assign [class="firefox"]            → 2
 # TRAY APPLICATIONS
 # num lock activated
 exec_always --no-startup-id numlockx off
-#antergos
 exec --no-startup-id nm-applet
 #install this program for applet
 exec network-manager-applet
@@ -195,23 +231,25 @@ exec clipit
 ## Gnome-Settings-Daemon
 exec gnome-settings-daemon 
 #
+exec --no-startup-id pamac-tray
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id clipit
+exec_always --no-startup-id /home/sevgo/.config/i3/scripts/dualscreen_autoset.sh
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
+#exec_always --no-startup-id /home/sevgo/.config/polybar/i3wm_polybar.sh
+
 #############################################
 ########## SHORTCUTS APPLICATIONS ###########
 #############################################
 #workspace 1 related
 bindsym $mod+F1 exec terminator;workspace 1;focus
-
 #workspace 2 related
 bindsym $mod+F2 exec firefox;workspace 2;focus
-
 #workspace 3 related
 bindsym $mod+F3 exec nautilus;workspace 3;focus
-
 #workspace 4 related
 bindsym $mod+F4 exec nemo;workspace 4;focus
-
-#workspace 5 related
-
 ## Dial monitor setup 
 bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/dualscreen_autoset.sh
 #
@@ -324,6 +362,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 hide_edge_borders both
 bindsym $mod+shift+b exec i3-msg border toggle
 
+
 #changing border style
 #bindsym $mod+t border normal
 #bindsym $mod+y border 1pixel
@@ -344,22 +383,19 @@ new_float normal
 # get the mouse out of the way with unclutter
 exec unclutter 
 
-# YABAR 
-#exec --no-startup-id yabar -c ~/.config/yabar/yabar.conf
-
 ################### BAR APPEARANCE ######################
 # bar toggle, hide or show 
 #bindsym $mod+b bar mode toggle
 bar {
-    height 32
+    height 24
     workspace_buttons yes
-    font pango:DroidSansMono 13
-    #font pango:Noto Sans 13
+    #font pango:DroidSansMono 13
+    font pango:Noto Mono for Powerline 10
     #you can change the place via xrandr
     position top
 
 status_command i3blocks -c ~/.config/i3/i3blocks-awesome.conf
-#
+
 colors {
         background #2F2F2F
         statusline #eeeeee
@@ -370,20 +406,18 @@ colors {
         inactive_workspace    #a9a9a9 #5f676a #a9a9a9
         urgent_workspace      #4A4A4A #4A4A4A #a9a9a9
         }
-
 }
-    
-
-# DarkGrey background with white text - not focus grey background - black text
-# Windows decoration colors
-# class                 border  backgr. text    indicator
-client.placeholder      #242424 #242424 #242424
-client.background       #242424 #242424 #242424
-client.focused          #4A4A4A #4A4A4A #e5e5e5 #4A4A4A
-client.unfocused        #222222 #222222 #aaaaaa #222222
-client.focused_inactive #222222 #222222 #a9a9a9 #222222
-client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
-
+##
+## DarkGrey background with white text - not focus grey background - black text
+## Windows decoration colors
+## class                 border  backgr. text    indicator
+#client.placeholder #b0c4bb #2f2f38 #b0c4bb #688486 #688486
+#client.background #2f2f38
+#client.focused #b0c4bb #2f2f38 #b0c4bb #81a2be #81a2be
+#client.unfocused #b0c4bb #2f2f38 #b0c4bb #688486 #688486
+#client.focused_inactive #b0c4bb #2f2f38 #b0c4bb #688486 #688486
+#client.urgent #b0c4bb #2f2f38 #b0c4bb #688486 #688486
+#
 ###########################################################################
 ###################  I 3  G A P S  N E X T   ##############################
 ###########################################################################
@@ -396,11 +430,10 @@ client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
 # packer i3-gaps-next-git --noedit
 
 for_window [class="^.*"] border pixel 2
-gaps inner 6 
-gaps outer 3
-#smart_gaps on
-#smart_borders on
-
+gaps inner 4 
+gaps outer 2
+smart_gaps on
+smart_borders on
 
 ###########################################################################
 ###################       I3 GAPS CHANGE     ##############################
@@ -493,3 +526,4 @@ bindsym $mod+Shift+q kill
 ## Lock screen
 #bindsym Control+$mod+l exec i3lock
 bindsym Control+$mod+l exec --no-startup-id ~/.config/i3/scripts/i3exit.sh lock
+
